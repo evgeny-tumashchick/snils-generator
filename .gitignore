@@ -1,0 +1,29 @@
+# IntelliJ project files
+build
+.idea
+*.iml
+out
+gen
+.allure
+/mm-automation/**/allure-results/
+
+# Java template
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+!gradle-wrapper.jar
+
+# Virtual machine crash logs
+hs_err_pid*
+
+# MacOS
+*~
+.DS_Store
+*.log
+
+# Gradle
+.gradle
+/gradle/wrapper
