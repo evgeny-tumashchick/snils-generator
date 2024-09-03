@@ -23,7 +23,7 @@ internal class SnilsGeneratorTest {
 
   private lateinit var snilsGenerator: SnilsGenerator
 
-  @BeforeEach()
+  @BeforeEach
   fun setup() {
     snilsGenerator = SnilsGenerator(generator)
   }
@@ -46,26 +46,26 @@ internal class SnilsGeneratorTest {
     expectedCheckDigit: String,
     caseDescription: String
   ) {
-    every { generator.randomDigits(SnilsGenerator.snilsRandomPartLength) } returns randomPart
+    every { generator.randomDigits(SnilsGenerator.SNILS_RANDOM_PART_LENGTH) } returns randomPart
     val snils = snilsGenerator.generateSnils()
-    val checkDigit = snils.takeLast(SnilsGenerator.snilsCheckDigitLength)
-    verify(exactly = 1) { generator.randomDigits(SnilsGenerator.snilsRandomPartLength) }
+    val checkDigit = snils.takeLast(SnilsGenerator.SNILS_CHECK_DIGIT_LENGTH)
+    verify(exactly = 1) { generator.randomDigits(SnilsGenerator.SNILS_RANDOM_PART_LENGTH) }
     assertEquals(expectedCheckDigit, checkDigit, "Snils check digit not valid")
   }
 
   @Test
   fun `generateRandomSnilsPart try to generate new snils if not valid and throws exception if fail`() {
-    every { generator.randomDigits(SnilsGenerator.snilsRandomPartLength) } returns "123999123"
+    every { generator.randomDigits(SnilsGenerator.SNILS_RANDOM_PART_LENGTH) } returns "123999123"
     assertThrows(IllegalStateException::class.java) { snilsGenerator.generateSnils() }
-    verify(exactly = 3) { generator.randomDigits(SnilsGenerator.snilsRandomPartLength) }
+    verify(exactly = 3) { generator.randomDigits(SnilsGenerator.SNILS_RANDOM_PART_LENGTH) }
   }
 
   @Test
   fun generateRandomSnilsPart() {
     val expectedSnilsRandomPart = "123123123"
-    every { generator.randomDigits(SnilsGenerator.snilsRandomPartLength) } returns expectedSnilsRandomPart
+    every { generator.randomDigits(SnilsGenerator.SNILS_RANDOM_PART_LENGTH) } returns expectedSnilsRandomPart
     assertEquals(expectedSnilsRandomPart, snilsGenerator.generateRandomSnilsPart())
-    verify(exactly = 1) { generator.randomDigits(SnilsGenerator.snilsRandomPartLength) }
+    verify(exactly = 1) { generator.randomDigits(SnilsGenerator.SNILS_RANDOM_PART_LENGTH) }
   }
 
   @Test
