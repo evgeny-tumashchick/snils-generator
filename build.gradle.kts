@@ -1,12 +1,19 @@
+import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-  kotlin("jvm") version "1.4.30"
+  kotlin("jvm") version "2.0.20"
   idea
 }
 
+val projectJdkVersion: String = JavaVersion.VERSION_17.toString()
+val projectJavaLanguageVersion: JavaLanguageVersion = JavaLanguageVersion.of(projectJdkVersion)
+
 idea {
   project {
-    jdkName = "1.8"
-    languageLevel = org.gradle.plugins.ide.idea.model.IdeaLanguageLevel("1.8")
+    jdkName = projectJdkVersion
+    languageLevel = IdeaLanguageLevel(projectJdkVersion)
   }
   module.name = "snils-generator"
 }
@@ -32,9 +39,7 @@ dependencies {
 }
 
 tasks {
-  withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-  }
+  withType<KotlinCompile> { compilerOptions { jvmTarget.set(JVM_17) } }
 }
 
 tasks.withType<Test> {
