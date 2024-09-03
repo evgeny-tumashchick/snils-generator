@@ -34,8 +34,8 @@ number.
 
 #### Additional Validation:
 
-- The SNILS number cannot contain the same digit three times in a row, ignoring hyphens. For example, `XXX-222-XXX YY`
-  and `XX2-22X-XXX YY` are invalid.
+- The SNILS number cannot contain the same digit three times in a row, ignoring hyphens.  
+For example, `XXX-222-XXX YY` and `XX2-22X-XXX YY` are invalid.
 
 ## Running Tests
 
